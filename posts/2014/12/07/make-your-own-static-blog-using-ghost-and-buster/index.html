@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Make your own static blog using Ghost and Buster</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,700" rel="stylesheet" />
+    <link href="/stylesheets/normalize.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/solarized.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/custom.css" rel="stylesheet" type="text/css" /> <!-- "crisp", bootstrap_theme_css -->
+    <script src="/javascripts/all.js" type="text/javascript"></script><script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" type="text/javascript"></script>
+  </head>
+
+  <body class="posts posts_2014 posts_2014_12 posts_2014_12_07 posts_2014_12_07_make-your-own-static-blog-using-ghost-and-buster posts_2014_12_07_make-your-own-static-blog-using-ghost-and-buster_index">
+    <div class="wrapper">
+      <div class="container body">
+        <div class="col-xs-12 col-sm-2">
+          <div class="row">
+            <div class="col-xs-offset-4 col-xs-4 col-sm-offset-0 col-sm-12">
+              <a href "/">
+                <img class="img-responsive img-circle" src="/images/logo.jpg" />
+              </a>
+            </div>
+          </div>
+          <div class="blog-title">
+            <h3>Callum White</h3>
+          </div>
+          <div class="col-xs-12">
+            <div class="row">
+              <ul class="nav nav-pills nav-stacked side-menu" role="tablist">
+                <li><a href="/about"><span><i class="fa fa-info"></i></span> About me</a></li>
+                <li><a href="mailto:callumw1991@gmail.com"><span><i class="fa fa-envelope"></i></span> Email me</a></li>
+                <li><a href="https://www.linkedin.com/in/callumjwhite"><span><i class="fa fa-linkedin"></i></span> LinkedIn</a></li>
+                <li><a href="https://github.com/cwhitey"><span><i class="fa
+                                                                  fa-github"></i></span> GitHub</a></li>
+                <li><a href=""><span><i class="fa fa-book"></i></span> Résumé</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-10">
+          <div class="main-section">
+            <div class="title-quote">
+              <div class="quote">
+                <div class="text">
+                  <h4>"Controlling complexity is the essence of computer
+                    programming."</h4>
+                </div>
+                <div class="author">
+                  <h6>- Brian Kernigan</h6>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <p>You can easily make your own blog for free by using <a href="https://ghost.org/">Ghost</a> with <a href="https://github.com/axitkhurana/buster/">Buster</a> and deploying it to your own <a href="https://pages.github.com/">Github Page</a>. Ghost is an opensource blogging platform which is <a href="http://marketplace.ghost.org/">highly configurable with themes</a>. You can download and run it yourself, or alternatively use their own hosting service which requires payment after the free trial period. You can use Buster to turn your blog into a static site, and deploy it directly to your GitHub Page.</p>
+
+<h4 id="setup">Setup</h4>
+<ol>
+  <li>
+    <p>Make your own GitHub Pages repo as described
+<a href="https://pages.github.com/">here</a>, although you'll need to leave it empty
+for Buster to work.</p>
+  </li>
+  <li>
+    <p>Make sure you have <a href="http://nodejs.org/download/">NodeJS and NPM installed</a>.</p>
+  </li>
+  <li>
+    <p>Download and unzip Ghost <a href="https://ghost.org/download/">here</a>. In this
+directory, run:</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>npm install --production
+npm start
+</pre></td></tr></tbody></table>
+</div>
+
+    <p>Ghost should start up on http://localhost:2368.</p>
+  </li>
+  <li>
+    <p>Go to http://localhost:2368/ghost/ and enter you information into the forms
+to get to the admin panel. From here you can publish blog posts, edit your
+blog information, select different themes, and edit your user profile.</p>
+  </li>
+  <li>
+    <p>Install PIP <a href="https://pip.pypa.io/en/latest/installing.html">here</a> and follow
+the directions.</p>
+  </li>
+  <li>
+    <p>Run:</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>buster setup --gh-repo<span class="o">=</span><span class="s1">'your GitHub Pages repo URL'</span>
+buster generate --domain<span class="o">=</span>localhost:2368
+buster deploy
+</pre></td></tr></tbody></table>
+</div>
+  </li>
+</ol>
+
+<p>Well done! Your blog should now be pushed to your GitHub Pages repo, and will be live at http://username.github.io shortly. Be patient. The first deployment always takes the longest, and could take up to 40 minutes. I've also had other updates take over 10 minutes to be reflected in production.
+New themes must go into <code>Ghost-root/content/themes/</code>, and if you'd like to like to play around with making your own theme or edit an existing theme from the marketplace, Ghost have a <a href="http://themes.ghost.org/">very good guide</a>. The theme used for this blog can be found <a href="https://github.com/cwhitey/crisp-ghost-theme">here</a>.</p>
+
+<h4 id="issues">Issues</h4>
+<p>I keep my entire ghost source in a separate GitHub repo so I can make blog changes from any machine configured with nodejs and Buster. However, when doing a <code>buster deploy</code> from a different machine, I often get the following error:</p>
+
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre>...
+error: failed to push some refs to
+'https://github.com/cwhitey/cwhitey.github.io.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+</pre></td></tr></tbody></table>
+</div>
+
+<p>To get it deployed I've had to copy the contents of the <code>static/</code> directory populated by the <code>buster generate</code> into my GitHub Pages repo, then push it manually:</p>
+
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>git add --all
+git commit -m "your message"
+git push -f
+</pre></td></tr></tbody></table>
+</div>
+
+<p>As you will be doing this entire process regularly, you may decide to just write a single script to do it for you. I wrote the following for this purpose:</p>
+
+<script src="https://gist.github.com/cwhitey/205aed89c0cb75553d07.js"></script>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <p class="text-muted">© 2015 Callum White. All rights reserved. Powered
+          by <a href="https://middlemanapp.com/">Middleman</a>.
+          These are my opinions alone. See my full <a href="/disclaimer">disclaimer</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

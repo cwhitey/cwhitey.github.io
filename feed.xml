@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blog Name</title>
+  <subtitle>Blog subtitle</subtitle>
+  <id>http://blog.url.com/posts</id>
+  <link href="http://blog.url.com/posts"/>
+  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <updated>2015-03-05T00:00:00+11:00</updated>
+  <author>
+    <name>Blog Author</name>
+  </author>
+  <entry>
+    <title>Some handy shell tricks I recently learned</title>
+    <link rel="alternate" href="http://blog.url.com/posts/2015/03/05/some-handy-shell-tricks-i-recently-learned/"/>
+    <id>http://blog.url.com/posts/2015/03/05/some-handy-shell-tricks-i-recently-learned/</id>
+    <published>2015-03-05T00:00:00+11:00</published>
+    <updated>2015-03-05T18:49:22+11:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Last week I discovered a couple of really handy shell tricks which I now use.&lt;/p&gt;
+
+&lt;h2 id="double-bang"&gt;Double BANG&lt;/h2&gt;
+&lt;p&gt;This first one I got off another developer I was pairing with at
+work. &lt;code&gt;!! &amp;lt;ENTER&amp;gt;&lt;/code&gt; can be used to reference the previous command which was
+executed. It can also be used with other commands e.g. &lt;code&gt;cat $(!!)&lt;/code&gt;. So far the only real
+use for it I've found is if you've typed a command and then realised you needed
+to run it with sudo. For this you'd use &lt;code&gt;sudo !! &amp;lt;ENTER&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id="double-esc"&gt;Double ESC&lt;/h2&gt;
+&lt;p&gt;This brings us to the other, more useful, shortcut I learned which I found by
+accident when trying to ESC something.
+&lt;code&gt;&amp;lt;ESC&amp;gt; &amp;lt;ESC&amp;gt;&lt;/code&gt; will give you the last command you typed, just with
+&lt;code&gt;sudo&lt;/code&gt; prepended onto it. If you've already started typing a command and
+then realise you need sudo at the start, &lt;code&gt;&amp;lt;ESC&amp;gt; &amp;lt;ESC&amp;gt;&lt;/code&gt; will add that for
+you and allow you to continue writing your command. Ever since I discovered
+this shortcut I have literally used it every day.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It's worth noting that I'm using oh-my-zsh with quite a few plugins, and I
+could only get the &lt;code&gt;!!&lt;/code&gt; shortcut to work using Bash.&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Syntax Tests</title>
+    <link rel="alternate" href="http://blog.url.com/posts/2015/03/02/syntax-tests/"/>
+    <id>http://blog.url.com/posts/2015/03/02/syntax-tests/</id>
+    <published>2015-03-02T12:37:00+11:00</published>
+    <updated>2015-03-02T22:51:02+11:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I'll now test some syntax highlighting.&lt;/p&gt;
+
+&lt;h2 id="clojure"&gt;Clojure&lt;/h2&gt;
+&lt;div class="highlight clojure"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;defn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;my-function&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;param1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;param2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="no"&gt;:b&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;:v&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"asdf"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h2 id="bash"&gt;Bash&lt;/h2&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"hi"&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; -f &lt;span class="s2"&gt;"/usr"&lt;/span&gt; &lt;span class="o"&gt;]]&lt;/span&gt;; &lt;span class="k"&gt;then
+   &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"yay"&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Tech Digest #1</title>
+    <link rel="alternate" href="http://blog.url.com/posts/2015/02/24/tech-digest-1/"/>
+    <id>http://blog.url.com/posts/2015/02/24/tech-digest-1/</id>
+    <published>2015-02-24T00:00:00+11:00</published>
+    <updated>2015-03-14T19:44:17+11:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h2 id="new-segment"&gt;New Segment&lt;/h2&gt;
+&lt;p&gt;I'm starting this new segment as a means of storing and documenting any quality
+software development related resources I find. I often find extremely
+interesting or helpful resources which I like to share with others, so hopefully
+with this new segment some of them will pique the interest of other developers
+also.&lt;/p&gt;
+
+&lt;h2 id="software-development"&gt;Software Development&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://jacquesmattheij.com/saving-a-project-and-a-company"&gt;Saving a Project and a Company - Jacques Mattheij&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="clojure"&gt;Clojure&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://blog.rjmetrics.com/2012/01/11/lexical-vs-dynamic-scope-in-clojure/"&gt;Lexical vs Dynamic Scope in Clojure - Chris McBride&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html"&gt;5 Faces of Dependency Injection in Clojure - Matthew Smith&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://mbonaci.github.io/clojure/"&gt;(Now former) Java developer sneaks up on Clojure - Marko Bonaci&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html"&gt;Why Boot is Relevant For The Clojure Ecosystem - Martin Klepsch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="blogging"&gt;Blogging&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://loyc.net/2014/blogging-on-github.html"&gt;Blogging on GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://sacha.me/articles/jekyll-rouge/"&gt;Syntax Highlighting in Jekyll With Rouge - Sacha Schmid&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="talks"&gt;Talks&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://thechangelog.com/rich-hickeys-greatest-hits/"&gt;Rich Hickey's Greatest Hits - The Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Helpful ClojureScript resources</title>
+    <link rel="alternate" href="http://blog.url.com/posts/2015/01/31/helpful-clojurescript-resources/"/>
+    <id>http://blog.url.com/posts/2015/01/31/helpful-clojurescript-resources/</id>
+    <published>2015-01-31T08:56:00+11:00</published>
+    <updated>2015-03-01T20:20:10+11:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h3 id="tutorials"&gt;Tutorials&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://github.com/magomimmo/modern-cljs"&gt;modern-cljs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="books"&gt;Books&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://shop.oreilly.com/product/0636920025139.do"&gt;ClojureScript: Up and Running - O'Reilly&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="frameworks"&gt;Frameworks&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://github.com/reagent-project/reagent"&gt;Reagent&lt;/a&gt; - Minimalistic interface to ReactJS. The &lt;a href="https://github.com/reagent-project/reagent-cookbook"&gt;Reagent Cookbook&lt;/a&gt; and the &lt;a href="https://github.com/reagent-project/reagent-template"&gt;Reagent Template&lt;/a&gt; are available to help you learn Reagent and set up your Reagent projects.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/levand/quiescent"&gt;Quiescent&lt;/a&gt; - Another lightwith interface to ReactJS.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/swannodette/om"&gt;Om&lt;/a&gt; - A much heavier interface to ReactJS than &lt;a href="https://github.com/levand/quiescent"&gt;Quiescent&lt;/a&gt; and &lt;a href="https://github.com/reagent-project/reagent"&gt;Reagent&lt;/a&gt;, but provides many more features.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://purnam.github.io/gyr/"&gt;Gyr&lt;/a&gt; - An interface to AngularJS. An example can be found &lt;a href="https://github.com/purnam/example.gyr"&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="documentation--tools"&gt;Documentation &amp;amp; Tools&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://github.com/cemerick/austin"&gt;Austin REPL&lt;/a&gt; - A ClojureScript REPL which is quick and easy to use and provides a bunch of useful utilities.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>My Emacs setup</title>
+    <link rel="alternate" href="http://blog.url.com/posts/2014/12/15/my-emacs-setup/"/>
+    <id>http://blog.url.com/posts/2014/12/15/my-emacs-setup/</id>
+    <published>2014-12-15T02:54:52+11:00</published>
+    <updated>2015-03-01T20:40:17+11:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I've been learning how to use Emacs for several months for Clojure development. I thought I would document my initial setup here and continue updating it as I find new packages and develop more useful/convenient keybindings. You can also find my up to date &lt;code&gt;.emacs.d&lt;/code&gt; in my &lt;a href="https://github.com/cwhitey/dotfiles"&gt;dotfiles&lt;/a&gt; GitHub repo.&lt;/p&gt;
+
+&lt;p&gt;I tried various starter kits such as &lt;a href="https://github.com/bbatsov/prelude"&gt;Prelude&lt;/a&gt;, &lt;a href="https://github.com/technomancy/emacs-starter-kit"&gt;Emacs Starter Kit&lt;/a&gt; and &lt;a href="https://github.com/overtone/emacs-live"&gt;Emacs Live&lt;/a&gt;. I eventually settled with Emacs Live for a couple of months. After getting frustrated while trying to (unsuccessfully) modify the Emacs Live setup, I started looking for other options. I then stumbled on &lt;a href="https://github.com/xiaohanyu/oh-my-emacs"&gt;oh-my-emacs&lt;/a&gt;. Oh-my-emacs provides you with a completely documented starting setup which benefits both beginners and experts of Emacs. It's configuration is contained within &lt;code&gt;.org&lt;/code&gt; files which contains Emacs Lisp code within &lt;code&gt;#+BEGIN_SRC&lt;/code&gt; and &lt;code&gt;#+END_SRC&lt;/code&gt; tags. The &lt;code&gt;.org&lt;/code&gt; files get parsed into &lt;code&gt;.el&lt;/code&gt; files during Emacs initialisation, and you can prevent snippets of Emacs Lisp code from being parsed by changing &lt;code&gt;#+BEGIN_SRC emacs-lisp&lt;/code&gt; to &lt;code&gt;#+BEGIN_SRC emacs-lisp :tangle no&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id="installation"&gt;Installation:&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Mac: &lt;a href="https://github.com/railwaycat/emacs-mac-port"&gt;Emacs Mac port&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Linux: Your Linux distro's package manager will likely contain Emacs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id="setup"&gt;Setup:&lt;/h4&gt;
+&lt;p&gt;Install oh-my-emacs by following these &lt;a href="https://github.com/xiaohanyu/oh-my-emacs#quick-start"&gt;Quick Start steps&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="the-following-requires-updates"&gt;The following requires updates…&lt;/h3&gt;
+
+&lt;h4 id="configuration"&gt;Configuration:&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add melpa archives&lt;/p&gt;
+
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt; (add-to-list 'package-archives
+              '("melpa" . "http://melpa.milkbox.net/packages/"))
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mac user keys&lt;/p&gt;
+
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt; (global-set-key (kbd "M-c") 'copy-region-as-kill)
+ (global-set-key (kbd "M-v") 'yank)
+ (global-set-key (kbd "M-z") 'undo)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href="http://www.emacswiki.org/emacs/NeoTree"&gt;NeoTree&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt; (global-set-key [f8] 'neotree-toggle)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href="http://www.emacswiki.org/emacs/WindMove"&gt;WindMove&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt; (when (fboundp 'windmove-default-keybindings)
+       (windmove-default-keybindings 'alt))
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Undo an undo&lt;/p&gt;
+
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt; (global-set-key (kbd "C-S-/") 'undo-tree-redo)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fullscreen a frame&lt;/p&gt;
+
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt; (global-set-key (kbd "C-c m") 'toggle-frame-maximized)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Helpful Clojure resources</title>
+    <link rel="alternate" href="http://blog.url.com/posts/2014/12/11/helpful-clojure-resources/"/>
+    <id>http://blog.url.com/posts/2014/12/11/helpful-clojure-resources/</id>
+    <published>2014-12-11T00:42:57+11:00</published>
+    <updated>2015-03-01T20:19:56+11:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;During my placement at Australia Post I spent a lot of time using Clojure. Clojure is a functional language on the JVM with LISP-like syntax. I've really enjoyed learning and using Clojure and, although I'm still learning, I've used some resources along the way which I think are great for Clojure beginners.&lt;/p&gt;
+
+&lt;h3 id="setup"&gt;Setup&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://www.lighttable.com/"&gt;Light Table&lt;/a&gt; - A good IDE for learning Clojure.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.braveclojure.com/basic-emacs/"&gt;Emacs&lt;/a&gt; - Alternatively, you can start off using Emacs. It has a higher learning curve but is highly configurable and works really well with Lisp-based languages.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://leiningen.org/"&gt;Leiningen&lt;/a&gt; - Tool for easy Clojure project and dependency management &lt;strong&gt;(mandatory)&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="tutorials"&gt;Tutorials&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://learnxinyminutes.com/docs/clojure/"&gt;Learn X in Y Minutes&lt;/a&gt; - Quickest way to get a brief understanding of Clojure syntax.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://tech.puredanger.com/2010/02/08/clojure-1-whats-up-doc/"&gt;puredanger's Tutorial&lt;/a&gt; - Written by an active Clojure contributer.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.braveclojure.com/"&gt;Brave Clojure&lt;/a&gt; - Very extensive but sometimes a little hard to follow.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://fasttrackclojure.blogspot.com.au/2010/09/lesson-1-hello-clojure.html"&gt;Fast Track Clojure&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://gist.github.com/john2x/e1dca953548bfdfb9844"&gt;Destructuring Tutorial/Reference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="challenges"&gt;Challenges&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://www.4clojure.com/"&gt;4clojure&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://clojurekoans.com/"&gt;Clojure Koans&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://exercism.io/"&gt;Exercism&lt;/a&gt; - Exercises for 19 different languages, including Clojure.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://projecteuler.net/"&gt;Project Euler&lt;/a&gt; - Language agnostic, but these challenges taught me a lot about how to solve algorithms in a functional way vs imperative.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="books"&gt;Books&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://pragprog.com/book/shcloj2/programming-clojure"&gt;Programming Clojure - Pragmatic Programmers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://shop.oreilly.com/product/0636920013754.do"&gt;Clojure Programming - O'Reilly&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://shop.oreilly.com/product/0636920029786.do"&gt;Clojure Cookbook - O'Reilly&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="web-development"&gt;Web Development&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://clojurewebdev.com/"&gt;Clojure Web Dev&lt;/a&gt; - A great introduction to web development in Clojure. Contains a very informative talk about building a backend supported web application, and includes code snippets and resources for further study.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.lispcast.com/what-web-framework-should-i-use"&gt;What Web Framework Should I Use?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.luminusweb.net/"&gt;Luminus&lt;/a&gt; - A great Leiningen template for setting up skeletons of Clojure webapps with various component configurations. It's accompanied by some very informative docs which make learning web development in Clojure much easier.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="documentation--tools"&gt;Documentation &amp;amp; Tools&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://tryclj.com/"&gt;tryclj&lt;/a&gt; - An online REPL.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://grimoire.arrdem.com/"&gt;grimoire&lt;/a&gt; - One of the best online references for Clojure documentation.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.clojure-toolbox.com/"&gt;Clojure Toolbox&lt;/a&gt; - An organised collection of useful libraries and tools for Clojure.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://clojurewerkz.org/"&gt;ClojureWerks&lt;/a&gt; - Another collection of quality Clojure libraries and their documentation.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.clojuresphere.com/"&gt;Clojure Sphere&lt;/a&gt; - A listing of statistics for components in the Clojure ecosystem.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://clojuredocs.org/"&gt;Clojure Docs&lt;/a&gt; - Community-powered clojure documentation.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/dakrone/lein-bikeshed"&gt;lein-bikeshed&lt;/a&gt; - A Leiningen plugin which scans your project for bad code.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+</feed>
