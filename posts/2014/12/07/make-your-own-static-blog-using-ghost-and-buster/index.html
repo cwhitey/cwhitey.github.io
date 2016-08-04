@@ -93,12 +93,12 @@ for Buster to work.</p></li>
 <li><p>Make sure you have <a href="http://nodejs.org/download/">NodeJS and NPM installed</a>.</p></li>
 <li><p>Download and unzip Ghost <a href="https://ghost.org/download/">here</a>. In this
 directory, run:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2</pre></td><td class="code"><pre>npm install --production
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>npm install --production
 npm start
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Ghost should start up on http://localhost:2368.</p></li>
 <li><p>Go to http://localhost:2368/ghost/ and enter you information into the forms
 to get to the admin panel. From here you can publish blog posts, edit your
@@ -106,13 +106,14 @@ blog information, select different themes, and edit your user profile.</p></li>
 <li><p>Install PIP <a href="https://pip.pypa.io/en/latest/installing.html">here</a> and follow
 the directions.</p></li>
 <li><p>Run:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-3</pre></td><td class="code"><pre>buster setup --gh-repo<span class="o">=</span><span class="s1">'your GitHub Pages repo URL'</span>
+3
+</pre></td><td class="rouge-code"><pre>buster setup --gh-repo<span class="o">=</span><span class="s1">'your GitHub Pages repo URL'</span>
 buster generate --domain<span class="o">=</span>localhost:2368
 buster deploy
 </pre></td></tr></tbody></table>
-</div></li>
+</code></pre></li>
 </ol>
 
 <p>Well done! Your blog should now be pushed to your GitHub Pages repo, and will be live at http://username.github.io shortly. Be patient. The first deployment always takes the longest, and could take up to 40 minutes. I&rsquo;ve also had other updates take over 10 minutes to be reflected in production.
@@ -121,14 +122,15 @@ New themes must go into <code>Ghost-root/content/themes/</code>, and if you&rsqu
 <h3>Issues</h3>
 
 <p>I keep my entire ghost source in a separate GitHub repo so I can make blog changes from any machine configured with nodejs and Buster. However, when doing a <code>buster deploy</code> from a different machine, I often get the following error:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
 7
-8</pre></td><td class="code"><pre>...
+8
+</pre></td><td class="rouge-code"><pre>...
 error: failed to push some refs to
 <span class="s1">'https://github.com/cwhitey/cwhitey.github.io.git'</span>
 hint: Updates were rejected because the remote contains work that you <span class="k">do
@@ -137,19 +139,18 @@ hint: to the same ref. You may want to first integrate the remote changes
 hint: <span class="o">(</span>e.g., <span class="s1">'git pull ...'</span><span class="o">)</span> before pushing again.
 hint: See the <span class="s1">'Note about fast-forwards'</span> <span class="k">in</span> <span class="s1">'git push --help'</span> <span class="k">for </span>details.
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>To get it deployed I&rsquo;ve had to copy the contents of the <code>static/</code> directory populated by the <code>buster generate</code> into my GitHub Pages repo, then push it manually:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-3</pre></td><td class="code"><pre>git add --all
+3
+</pre></td><td class="rouge-code"><pre>git add --all
 git commit -m <span class="s2">"your message"</span>
 git push -f
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>As you will be doing this entire process regularly, you may decide to just write a single script to do it for you. I wrote the following for this purpose:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -175,7 +176,8 @@ git push -f
 24
 25
 26
-27</pre></td><td class="code"><pre><span class="c">#!/bin/bash</span>
+27
+</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
 <span class="c">#Assumes:</span>
 <span class="c">#  * Ghost is running on localhost:2368 (by running npm start)</span>
 <span class="c">#  * Buster is installed with PIP</span>
@@ -203,8 +205,7 @@ git commit -m <span class="s2">"</span><span class="nv">$1</span><span class="s2
 <span class="nb">echo</span> <span class="s2">"FORCE PUSHING TO GITHUB PAGES..."</span>;
 git push --force;
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
       <div style='clear: both'></div>
     </div>
 

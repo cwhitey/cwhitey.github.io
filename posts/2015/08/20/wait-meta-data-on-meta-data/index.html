@@ -83,27 +83,27 @@
 
     <div class='contents'>
       <p>Yesterday James Sofra and I were working on something where we had a map which could be from one of two different sources. We wanted to act based on the origin of the map and we had control over the sources, so we had a few options. Ideally we didn&rsquo;t want to store any extra information in the map itself, and the code was designed in a way we were both happy with, so refactoring wasn&rsquo;t desirable either. What we wanted was just to be able to pass along some metadata with the map from each origin which specifies where it came from. Fortunately Clojure provides <a href="http://clojure.org/metadata">a way of adding metadata</a> to things. We moved ahead using <code>with-meta</code> to attach metadata to the map from each source:</p>
-<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="p">(</span><span class="nb">with-meta</span><span class="w"> </span><span class="p">{</span><span class="no">:my</span><span class="w"> </span><span class="no">:map</span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="no">:source</span><span class="w"> </span><span class="no">:source-name</span><span class="p">})</span><span class="w">
+<pre class="highlight clojure"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="p">(</span><span class="nb">with-meta</span><span class="w"> </span><span class="p">{</span><span class="no">:my</span><span class="w"> </span><span class="no">:map</span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="no">:source</span><span class="w"> </span><span class="no">:source-name</span><span class="p">})</span><span class="w">
 </span></pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Then I was curious&hellip; &ldquo;If the metadata itself is just a map, can we attach metadata to our metadata?&rdquo;</p>
 
 <p>Our eyes widened and we turned back to our REPLs, racing to find the answer.</p>
 
 <p>As it turns out, you can do this!</p>
-<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight clojure"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
-5</pre></td><td class="code"><pre><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">my-map</span><span class="w">           </span><span class="p">{</span><span class="no">:my</span><span class="w"> </span><span class="s">"map"</span><span class="p">}</span><span class="w">
+5
+</pre></td><td class="rouge-code"><pre><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">my-map</span><span class="w">           </span><span class="p">{</span><span class="no">:my</span><span class="w"> </span><span class="s">"map"</span><span class="p">}</span><span class="w">
       </span><span class="n">meta-map</span><span class="w">         </span><span class="p">{</span><span class="no">:meta-map</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span><span class="w">
       </span><span class="n">nested-meta-map</span><span class="w">  </span><span class="p">{</span><span class="no">:nested-meta</span><span class="w"> </span><span class="mi">2</span><span class="p">}]</span><span class="w">
 </span><span class="p">(</span><span class="nb">meta</span><span class="w"> </span><span class="p">(</span><span class="nb">meta</span><span class="w"> </span><span class="p">(</span><span class="nb">with-meta</span><span class="w"> </span><span class="n">my-map</span><span class="w"> </span><span class="p">(</span><span class="nb">with-meta</span><span class="w"> </span><span class="n">meta-map</span><span class="w"> </span><span class="n">nested-meta-map</span><span class="p">))))</span><span class="w">
 </span><span class="c1">; =&gt; {:nested-meta 2}
 </span></pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>How cool is that? Although I have no idea why you would want to apply metadata to your metadata&hellip;</p>
 
       <div style='clear: both'></div>

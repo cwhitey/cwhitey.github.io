@@ -90,36 +90,36 @@ The following commands aim to make emacs server management and client creation a
 <p>Make sure you have <code>emacs</code> and <code>emacsclient</code> available on your path first.</p>
 
 <p>To start an emacs server:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nb">alias </span><span class="nv">es</span><span class="o">=</span><span class="s1">'emacs --daemon'</span>
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">alias </span><span class="nv">es</span><span class="o">=</span><span class="s1">'emacs --daemon'</span>
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Define a function for starting emacs client in a GUI window.
 If <code>alternate-editor</code> is an empty string, Emacs goes through the one-off process of starting in daemon mode before running emacsclient.</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>ec<span class="o">()</span> <span class="o">{</span> emacsclient --alternate-editor<span class="o">=</span><span class="s1">''</span> -c <span class="nv">$@</span> &amp;; <span class="o">}</span>
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>ec<span class="o">()</span> <span class="o">{</span> emacsclient --alternate-editor<span class="o">=</span><span class="s1">''</span> -c <span class="nv">$@</span> &amp;; <span class="o">}</span>
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Start emacs in your terminal:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="k">function </span>et <span class="o">{</span> checker-ec -t <span class="nv">$@</span>; <span class="o">}</span>
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">alias </span><span class="nv">et</span><span class="o">=</span><span class="s2">"emacsclient --alternate-editor='' -t"</span>
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Kill your emacs server (and any accompanying clients):</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nb">alias </span><span class="nv">ek</span><span class="o">=</span><span class="s2">"emacsclient -e '(kill-emacs)'"</span>
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">alias </span><span class="nv">ek</span><span class="o">=</span><span class="s2">"emacsclient -e '(kill-emacs)'"</span>
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Kill emacs, then restart the server:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nb">alias </span><span class="nv">er</span><span class="o">=</span><span class="s1">'ek; es;'</span>
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">alias </span><span class="nv">er</span><span class="o">=</span><span class="s1">'ek; es;'</span>
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Fix color issues with emacs terminal sessions:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm-256color
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm-256color
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
       <div style='clear: both'></div>
     </div>
 

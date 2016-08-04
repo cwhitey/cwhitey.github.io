@@ -87,50 +87,50 @@
 <p>Well with <code>lein-try</code>, you can!</p>
 
 <p>Give it a go:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>lein try prismatic/plumbing <span class="s2">"0.4.2"</span>
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>lein try prismatic/plumbing <span class="s2">"0.4.2"</span>
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Then once in the REPL you can just <code>use</code> a namespace:</p>
-<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight clojure"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6</pre></td><td class="code"><pre><span class="p">(</span><span class="nf">use</span><span class="w"> </span><span class="ss">'prismatic.core</span><span class="p">)</span><span class="w">
+6
+</pre></td><td class="rouge-code"><pre><span class="p">(</span><span class="nf">use</span><span class="w"> </span><span class="ss">'prismatic.core</span><span class="p">)</span><span class="w">
 </span><span class="c1">;;=&gt; nil
 </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">my-fnk</span><span class="w"> </span><span class="p">(</span><span class="nf">fnk</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">{</span><span class="n">c</span><span class="w"> </span><span class="mi">4</span><span class="p">}</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="p">{</span><span class="n">e</span><span class="w"> </span><span class="mi">2</span><span class="p">}]</span><span class="w"> </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="n">e</span><span class="p">)))</span><span class="w">
 </span><span class="c1">;;=&gt; #'user/my-fnk
 </span><span class="p">(</span><span class="nf">my-fnk</span><span class="w"> </span><span class="p">{</span><span class="no">:a</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="no">:b</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="no">:d</span><span class="w"> </span><span class="mi">3</span><span class="p">})</span><span class="w">
 </span><span class="c1">;;=&gt; 12
 </span></pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>You can leave out the version number. This will simply pull the latest version from Clojars.</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>lein try prismatic/plumbing
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>lein try prismatic/plumbing
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>And you can supply multiple libraries:</p>
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>lein try prismatic/plumbing org.flatland/useful
+<pre class="highlight shell"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>lein try prismatic/plumbing org.flatland/useful
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Let&rsquo;s <code>require</code> and name a namespace from each:</p>
-<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight clojure"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6</pre></td><td class="code"><pre><span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="n">useful.map</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">m1</span><span class="p">])</span><span class="w">
+6
+</pre></td><td class="rouge-code"><pre><span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="n">useful.map</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">m1</span><span class="p">])</span><span class="w">
 </span><span class="c1">;;=&gt; nil
 </span><span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="n">plumbing.map</span><span class="w"> </span><span class="no">:as</span><span class="w"> </span><span class="n">m2</span><span class="p">])</span><span class="w">
 </span><span class="c1">;;=&gt; nil
 </span><span class="p">(</span><span class="nf">m1/map-keys</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="w"> </span><span class="s">"a"</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="s">"b"</span><span class="p">}</span><span class="w"> </span><span class="nb">inc</span><span class="p">)</span><span class="w">
 </span><span class="c1">;;=&gt; {2 "a" 3 "b"}
 </span></pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>That&rsquo;s it! Give it a go!</p>
 
       <div style='clear: both'></div>

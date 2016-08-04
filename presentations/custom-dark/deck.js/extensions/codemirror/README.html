@@ -14,12 +14,12 @@ can also be executable, which is pretty exciting.</p>
 <h1>Setup:</h1>
 
 <p>Include the stylesheet:</p>
-<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>&lt;link rel="stylesheet" href="../extensions/codemirror/deck.codemirror.css"&gt;
+<pre class="highlight plaintext"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>&lt;link rel="stylesheet" href="../extensions/codemirror/deck.codemirror.css"&gt;
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Include the JS source:</p>
-<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight plaintext"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -33,7 +33,8 @@ can also be executable, which is pretty exciting.</p>
 12
 13
 14
-15</pre></td><td class="code"><pre>&lt;!-- Base codemiror code --&gt;
+15
+</pre></td><td class="rouge-code"><pre>&lt;!-- Base codemiror code --&gt;
 &lt;script src="../extensions/codemirror/codemirror.js"&gt;&lt;/script&gt;
 
 &lt;!-- Syntax highlighting Modes --&gt;
@@ -49,40 +50,40 @@ can also be executable, which is pretty exciting.</p>
 &lt;!-- Plugin code --&gt;
 &lt;script src="../extensions/codemirror/deck.codemirror.js"&gt;&lt;/script&gt;
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Include your favorite CodeMirror syntax style:</p>
-<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>&lt;link rel="stylesheet" href="../extensions/codemirror/themes/default.css"&gt;
+<pre class="highlight plaintext"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>&lt;link rel="stylesheet" href="../extensions/codemirror/themes/default.css"&gt;
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <p>Options are:</p>
-<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight plaintext"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
-5</pre></td><td class="code"><pre>cobalt.css
+5
+</pre></td><td class="rouge-code"><pre>cobalt.css
 default.css
 elegant.css
 neat.css
 night.css
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <h1>Use:</h1>
 
 <p>There are two ways to create code blocks:
 Inside your slide:</p>
 
 <h2>Text Area:</h2>
-<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight plaintext"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
 7
-8</pre></td><td class="code"><pre>&lt;div&gt;
+8
+</pre></td><td class="rouge-code"><pre>&lt;div&gt;
   &lt;textarea id="code" name="code" class="code" mode="javascript" style="display: none;" runnable="true"&gt;// codemirror demo party!
     var greeter = function(name) {
       return "Why hello there " + name;
@@ -91,23 +92,22 @@ Inside your slide:</p>
   &lt;/textarea&gt;
 &lt;/div&gt;
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <h2>Any other item:</h2>
-<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight plaintext"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6</pre></td><td class="code"><pre>&lt;div&gt;
+6
+</pre></td><td class="rouge-code"><pre>&lt;div&gt;
   &lt;div id="code" name="code" class="code" mode="javascript" style="display: none;"&gt;// codemirror demo party!
     var obj = { text : "Hello all!"};
     console.log("HI THERE");
   &lt;/div&gt;
 &lt;/div&gt;
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <h1>Setup scripts:</h1>
 
 <p>Sometimes you have to do a lot of set up for your code that doesn&rsquo;t need to live inside
@@ -116,14 +116,15 @@ create hidden script tags that will be evaluated on &ldquo;Run&rdquo; before the
 
 <p>It must have the type set to &ldquo;codemirror&rdquo; and the data-selector must be set to the selector of
 the editor that it&rsquo;s running for:</p>
-<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight plaintext"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
 7
-8</pre></td><td class="code"><pre>&lt;script type="codemirror" data-selector="#code4"&gt;
+8
+</pre></td><td class="rouge-code"><pre>&lt;script type="codemirror" data-selector="#code4"&gt;
   var someVar = 10;
 &lt;/script&gt;
 
@@ -132,24 +133,23 @@ the editor that it&rsquo;s running for:</p>
   console.log(someVar);
 &lt;/textarea&gt;
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <h1>Globals!</h1>
 
 <p>Sometimes you just need to access a global of some kind. The code in the codemirror editors is executed
 in a sandbox, which means whatever it is you load in your actual slides, is NOT going to be available by default.
 To give access to, for example, jQuery object, define a &ldquo;globals&rdquo; attribute on the code blocks with 
 the names of the vars you need. Globals can be comma delimited, for example: &ldquo;$,Backbone,_&rdquo;.</p>
-<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<pre class="highlight plaintext"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-4</pre></td><td class="code"><pre>&lt;textarea id="code4" name="code" class="code" mode="javascript" style="display: none;" runnable="true" globals="$"&gt;
+4
+</pre></td><td class="rouge-code"><pre>&lt;textarea id="code4" name="code" class="code" mode="javascript" style="display: none;" runnable="true" globals="$"&gt;
   // output my log
   console.log($('script').size());
 &lt;/textarea&gt;
 </pre></td></tr></tbody></table>
-</div>
-
+</code></pre>
 <h1>Element Attributes:</h1>
 
 <p>Regardless of your element type, the following attributes should be set:</p>
