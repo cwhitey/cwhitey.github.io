@@ -1,0 +1,167 @@
+<h1>Deck.js-CodeMirror Extension</h1>
+
+<p>This extension allows you to embed codemirror code snippets in your slides. Those codeblocks
+can also be executable, which is pretty exciting.</p>
+
+<p>An example is running here: http://ireneros.com/deck/deck.js-codemirror/introduction</p>
+
+<p>You can also see those slides in the <code>introduction</code> folder.</p>
+
+<h1>Installation:</h1>
+
+<p>Move all this into a folder called &lsquo;codemirror&rsquo; in your deck.js/extensions/ folder.</p>
+
+<h1>Setup:</h1>
+
+<p>Include the stylesheet:</p>
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>&lt;link rel="stylesheet" href="../extensions/codemirror/deck.codemirror.css"&gt;
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Include the JS source:</p>
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre>&lt;!-- Base codemiror code --&gt;
+&lt;script src="../extensions/codemirror/codemirror.js"&gt;&lt;/script&gt;
+
+&lt;!-- Syntax highlighting Modes --&gt;
+
+&lt;!-- javascript --&gt;
+&lt;script src="../mode/javascript/javascript.js"&gt;&lt;/script&gt;
+
+&lt;!-- html mode (note html mode requires xml, css and javascript) --&gt;
+&lt;script src="../extensions/codemirror/mode/xml/xml.js"&gt;&lt;/script&gt;
+&lt;script src="../extensions/codemirror/mode/css/css.js"&gt;&lt;/script&gt;
+&lt;script src="../extensions/codemirror/mode/htmlmixed/htmlmixed.js"&gt;&lt;/script&gt;
+
+&lt;!-- Plugin code --&gt;
+&lt;script src="../extensions/codemirror/deck.codemirror.js"&gt;&lt;/script&gt;
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Include your favorite CodeMirror syntax style:</p>
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>&lt;link rel="stylesheet" href="../extensions/codemirror/themes/default.css"&gt;
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Options are:</p>
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre>cobalt.css
+default.css
+elegant.css
+neat.css
+night.css
+</pre></td></tr></tbody></table>
+</div>
+
+<h1>Use:</h1>
+
+<p>There are two ways to create code blocks:
+Inside your slide:</p>
+
+<h2>Text Area:</h2>
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre>&lt;div&gt;
+  &lt;textarea id="code" name="code" class="code" mode="javascript" style="display: none;" runnable="true"&gt;// codemirror demo party!
+    var greeter = function(name) {
+      return "Why hello there " + name;
+    }
+    console.log(greeter("Joe"));
+  &lt;/textarea&gt;
+&lt;/div&gt;
+</pre></td></tr></tbody></table>
+</div>
+
+<h2>Any other item:</h2>
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre>&lt;div&gt;
+  &lt;div id="code" name="code" class="code" mode="javascript" style="display: none;"&gt;// codemirror demo party!
+    var obj = { text : "Hello all!"};
+    console.log("HI THERE");
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre></td></tr></tbody></table>
+</div>
+
+<h1>Setup scripts:</h1>
+
+<p>Sometimes you have to do a lot of set up for your code that doesn&rsquo;t need to live inside
+the actual codemirror editor (because it&rsquo;s not of interest to your readers.) You can now 
+create hidden script tags that will be evaluated on &ldquo;Run&rdquo; before the editor code runs.</p>
+
+<p>It must have the type set to &ldquo;codemirror&rdquo; and the data-selector must be set to the selector of
+the editor that it&rsquo;s running for:</p>
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre>&lt;script type="codemirror" data-selector="#code4"&gt;
+  var someVar = 10;
+&lt;/script&gt;
+
+&lt;textarea id="code4" name="code" class="code" mode="javascript" style="display: none;" runnable="true"&gt;
+  // output my log
+  console.log(someVar);
+&lt;/textarea&gt;
+</pre></td></tr></tbody></table>
+</div>
+
+<h1>Globals!</h1>
+
+<p>Sometimes you just need to access a global of some kind. The code in the codemirror editors is executed
+in a sandbox, which means whatever it is you load in your actual slides, is NOT going to be available by default.
+To give access to, for example, jQuery object, define a &ldquo;globals&rdquo; attribute on the code blocks with 
+the names of the vars you need. Globals can be comma delimited, for example: &ldquo;$,Backbone,_&rdquo;.</p>
+<div class="highlight plaintext"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre>&lt;textarea id="code4" name="code" class="code" mode="javascript" style="display: none;" runnable="true" globals="$"&gt;
+  // output my log
+  console.log($('script').size());
+&lt;/textarea&gt;
+</pre></td></tr></tbody></table>
+</div>
+
+<h1>Element Attributes:</h1>
+
+<p>Regardless of your element type, the following attributes should be set:</p>
+
+<ul>
+<li>class - code (should always be set to code.)</li>
+<li>mode  - language mode. This plugin now supports all modes. Look into the mode directory and include the ones you like. Note that some require additional modes so be sure to check the Codemirror site.</li>
+<li>theme (optional) - If you want multiple themes in your slides, include multiple stylesheets and set this attribute to the theme name.</li>
+<li>runnable (optiona) - If true, will add a Run button to the window and pipe the eval&rsquo;s console output to an output element right below. </li>
+</ul>
+
+<h1>Contact:</h1>
+
+<p>Irene Ros (@ireneros)
+http://bocoup.com</p>

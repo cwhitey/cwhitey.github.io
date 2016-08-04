@@ -1,0 +1,127 @@
+<!doctype html>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Wait... meta-data on meta-data?!?</title>
+
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,700" rel="stylesheet" />
+        <link href="/stylesheets/normalize.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlighting.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlighting-custom.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/custom.css" rel="stylesheet" type="text/css" />
+        <!-- <script src="/javascripts/all.js" type="text/javascript"></script><script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script> -->
+
+        <!-- Add favicon from build folder  -->
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    </head>
+
+    <body class="posts posts_2015 posts_2015_08 posts_2015_08_20 posts_2015_08_20_wait-meta-data-on-meta-data posts_2015_08_20_wait-meta-data-on-meta-data_index">
+        <div class="wrapper">
+            <div class="container body">
+                <div class="col-xs-12 col-lg-2">
+                    <div class="row">
+                        <div class="col-xs-offset-4 col-xs-4 col-lg-offset-0 col-lg-12">
+                            <a href="/">
+                                <img class="img-responsive img-circle" src="/images/logo.jpg" />
+                                <h3 class="blog-title">Callum White</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <ul class="nav nav-pills nav-stacked side-menu" role="tablist">
+                                <li>
+                                    <a href="/about"><span><i class="fa fa-info"></i></span> About me</a>
+                                </li>
+                                <li>
+                                    <a href="/resume"><span><i class="fa fa-book"></i></span> Résumé</a>
+                                </li>
+                                <!-- <li>
+                                     <a href="/presentations"><span><i class="fa fa-play-circle"></i></span> Presentations</a>
+                                     </li> -->
+                                <li>
+                                    <a href="mailto:callumw1991@gmail.com" target="_blank">
+                                        <span><i class="fa fa-envelope"></i></span> Email me</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/callumjwhite" target="_blank">
+                                        <span><i class="fa fa-linkedin"></i></span> LinkedIn</a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/cwhitey" target="_blank">
+                                        <span><i class="fa fa-github"></i></span> GitHub</a>
+                                </li>
+                                <li>
+                                    <a href="http://feeds.feedburner.com/cwhitey/ryrF" target="_blank">
+                                        <span><i class="fa fa-rss"></i></span> RSS</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-10">
+                    <div class="main-section">
+                        <div class="title-quote">
+                            <div class="quote">
+                                <div class="text">
+                                    <h4>"Controlling complexity is the essence of computer
+                                        programming."</h4>
+                                </div>
+                                <div class="author">
+                                    <h6>- Brian Kernigan</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row page-content">
+                              <article>
+    <h1>Wait... meta-data on meta-data?!?</h1>
+    <small>Aug 20 2015</small>
+
+    <div class='contents'>
+      <p>Yesterday James Sofra and I were working on something where we had a map which could be from one of two different sources. We wanted to act based on the origin of the map and we had control over the sources, so we had a few options. Ideally we didn&rsquo;t want to store any extra information in the map itself, and the code was designed in a way we were both happy with, so refactoring wasn&rsquo;t desirable either. What we wanted was just to be able to pass along some metadata with the map from each origin which specifies where it came from. Fortunately Clojure provides <a href="http://clojure.org/metadata">a way of adding metadata</a> to things. We moved ahead using <code>with-meta</code> to attach metadata to the map from each source:</p>
+<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="p">(</span><span class="nb">with-meta</span><span class="w"> </span><span class="p">{</span><span class="no">:my</span><span class="w"> </span><span class="no">:map</span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="no">:source</span><span class="w"> </span><span class="no">:source-name</span><span class="p">})</span><span class="w">
+</span></pre></td></tr></tbody></table>
+</div>
+
+<p>Then I was curious&hellip; &ldquo;If the metadata itself is just a map, can we attach metadata to our metadata?&rdquo;</p>
+
+<p>Our eyes widened and we turned back to our REPLs, racing to find the answer.</p>
+
+<p>As it turns out, you can do this!</p>
+<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">my-map</span><span class="w">           </span><span class="p">{</span><span class="no">:my</span><span class="w"> </span><span class="s">"map"</span><span class="p">}</span><span class="w">
+      </span><span class="n">meta-map</span><span class="w">         </span><span class="p">{</span><span class="no">:meta-map</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span><span class="w">
+      </span><span class="n">nested-meta-map</span><span class="w">  </span><span class="p">{</span><span class="no">:nested-meta</span><span class="w"> </span><span class="mi">2</span><span class="p">}]</span><span class="w">
+</span><span class="p">(</span><span class="nb">meta</span><span class="w"> </span><span class="p">(</span><span class="nb">meta</span><span class="w"> </span><span class="p">(</span><span class="nb">with-meta</span><span class="w"> </span><span class="n">my-map</span><span class="w"> </span><span class="p">(</span><span class="nb">with-meta</span><span class="w"> </span><span class="n">meta-map</span><span class="w"> </span><span class="n">nested-meta-map</span><span class="p">))))</span><span class="w">
+</span><span class="c1">; =&gt; {:nested-meta 2}
+</span></pre></td></tr></tbody></table>
+</div>
+
+<p>How cool is that? Although I have no idea why you would want to apply metadata to your metadata&hellip;</p>
+
+      <div style='clear: both'></div>
+    </div>
+
+    <div id="discourse-comments"></div>
+
+  </article>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer text-muted">
+                &copy; 2015 Callum White. All rights reserved. Powered
+                by <a href="https://middlemanapp.com/">Middleman</a>.
+                These are my opinions alone. See my full <a href="/disclaimer">disclaimer</a>.
+            </footer>
+        </div>
+    </body>
+</html>

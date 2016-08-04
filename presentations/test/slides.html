@@ -1,0 +1,113 @@
+<h1>test</h1>
+
+<p>!SLIDE opener</p>
+
+<p><img alt="Elixir" src="https://avatars2.githubusercontent.com/u/1481354?v=3&amp;s=100" /></p>
+
+<h1>Elixir</h1>
+
+<h3>A small primer</h3>
+
+<p>!SLIDE</p>
+
+<h1>Disclaimer</h1>
+
+<h3>I don&rsquo;t really know much</h3>
+
+<p>!SLIDE</p>
+
+<h3>Just playing around and having fun :)</h3>
+
+<p>!SLIDE</p>
+
+<h1>Elixer is&hellip;</h1>
+
+<p>!SLIDE</p>
+
+<h1>VERY young</h1>
+
+<h3>Surfaced in 2012</h3>
+
+<p>!SLIDE</p>
+
+<h1>It is:</h1>
+
+<ul>
+<li>Functional</li>
+<li>Immutable</li>
+<li>Concurrent</li>
+</ul>
+
+<p>!SLIDE</p>
+
+<h1>Influenced by:</h1>
+
+<ul>
+<li>Clojure</li>
+<li>Erlang</li>
+<li>Ruby</li>
+</ul>
+
+<p>!SLIDE</p>
+
+<h3>Runs on the ErlangVM (BEAM)</h3>
+
+<p>!SLIDE</p>
+
+<blockquote>
+<p>But Callum, where&rsquo;s the code??</p>
+</blockquote>
+
+<p>!SLIDE</p>
+
+<h3>Equality</h3>
+<div class="highlight elixir"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="m">1</span> <span class="o">==</span> <span class="m">1</span>
+<span class="c1">#=&gt; true</span>
+
+<span class="m">1.0</span> <span class="o">===</span> <span class="m">1</span>
+<span class="c1">#=&gt; false</span>
+
+<span class="ss">:a</span> <span class="o">==</span> <span class="p">:</span><span class="s1">'a'</span>
+<span class="c1">#=&gt; true</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>!SLIDE</p>
+
+<h3>Pattern matching</h3>
+<div class="highlight elixir"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td><td class="code"><pre><span class="m">1</span> <span class="o">=</span> <span class="m">1</span>
+<span class="c1">#=&gt; 1</span>
+
+<span class="m">1</span> <span class="o">=</span> <span class="m">2</span>
+<span class="c1">#=&gt; ** (MatchError) no match of right hand side value: 2</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="m">1</span>
+<span class="c1">#=&gt; a</span>
+
+<span class="m">1</span> <span class="o">=</span> <span class="n">a</span>
+<span class="c1">#=&gt; 1</span>
+
+<span class="p">[</span><span class="m">1</span><span class="p">,</span> <span class="n">_</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="m">100</span><span class="p">]</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>!SLIDE</p>

@@ -1,0 +1,16 @@
+/* line 1, ../presentations/custom-dark/deck.js/extensions/scale/deck.scale.scss */
+.csstransforms .deck-container.deck-scale {
+  width: auto;
+  -webkit-transform-origin: 50% 0;
+  -moz-transform-origin: 50% 0;
+  -o-transform-origin: 50% 0;
+  -ms-transform-origin: 50% 0;
+  transform-origin: 50% 0; }
+  /* line 9, ../presentations/custom-dark/deck.js/extensions/scale/deck.scale.scss */
+  .csstransforms .deck-container.deck-scale.deck-menu {
+    width: 70%;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -o-transform: none !important;
+    -ms-transform: none !important;
+    transform: none !important; }

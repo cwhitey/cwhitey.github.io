@@ -1,0 +1,226 @@
+<!doctype html>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Make your own static blog using Ghost and Buster</title>
+
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,700" rel="stylesheet" />
+        <link href="/stylesheets/normalize.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlighting.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlighting-custom.css" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link href="/stylesheets/custom.css" rel="stylesheet" type="text/css" />
+        <!-- <script src="/javascripts/all.js" type="text/javascript"></script><script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script> -->
+
+        <!-- Add favicon from build folder  -->
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+    </head>
+
+    <body class="posts posts_2014 posts_2014_12 posts_2014_12_07 posts_2014_12_07_make-your-own-static-blog-using-ghost-and-buster posts_2014_12_07_make-your-own-static-blog-using-ghost-and-buster_index">
+        <div class="wrapper">
+            <div class="container body">
+                <div class="col-xs-12 col-lg-2">
+                    <div class="row">
+                        <div class="col-xs-offset-4 col-xs-4 col-lg-offset-0 col-lg-12">
+                            <a href="/">
+                                <img class="img-responsive img-circle" src="/images/logo.jpg" />
+                                <h3 class="blog-title">Callum White</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <ul class="nav nav-pills nav-stacked side-menu" role="tablist">
+                                <li>
+                                    <a href="/about"><span><i class="fa fa-info"></i></span> About me</a>
+                                </li>
+                                <li>
+                                    <a href="/resume"><span><i class="fa fa-book"></i></span> Résumé</a>
+                                </li>
+                                <!-- <li>
+                                     <a href="/presentations"><span><i class="fa fa-play-circle"></i></span> Presentations</a>
+                                     </li> -->
+                                <li>
+                                    <a href="mailto:callumw1991@gmail.com" target="_blank">
+                                        <span><i class="fa fa-envelope"></i></span> Email me</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/in/callumjwhite" target="_blank">
+                                        <span><i class="fa fa-linkedin"></i></span> LinkedIn</a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/cwhitey" target="_blank">
+                                        <span><i class="fa fa-github"></i></span> GitHub</a>
+                                </li>
+                                <li>
+                                    <a href="http://feeds.feedburner.com/cwhitey/ryrF" target="_blank">
+                                        <span><i class="fa fa-rss"></i></span> RSS</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-10">
+                    <div class="main-section">
+                        <div class="title-quote">
+                            <div class="quote">
+                                <div class="text">
+                                    <h4>"Controlling complexity is the essence of computer
+                                        programming."</h4>
+                                </div>
+                                <div class="author">
+                                    <h6>- Brian Kernigan</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row page-content">
+                              <article>
+    <h1>Make your own static blog using Ghost and Buster</h1>
+    <small>Dec  7 2014</small>
+
+    <div class='contents'>
+      <p>You can easily make your own blog for free by using <a href="https://ghost.org/">Ghost</a> with <a href="https://github.com/axitkhurana/buster/">Buster</a> and deploying it to your own <a href="https://pages.github.com/">Github Page</a>. Ghost is an opensource blogging platform which is <a href="http://marketplace.ghost.org/">highly configurable with themes</a>. You can download and run it yourself, or alternatively use their own hosting service which requires payment after the free trial period. You can use Buster to turn your blog into a static site, and deploy it directly to your GitHub Page.</p>
+
+<h3>Setup</h3>
+
+<ol>
+<li><p>Make your own GitHub Pages repo as described
+<a href="https://pages.github.com/">here</a>, although you&rsquo;ll need to leave it empty
+for Buster to work.</p></li>
+<li><p>Make sure you have <a href="http://nodejs.org/download/">NodeJS and NPM installed</a>.</p></li>
+<li><p>Download and unzip Ghost <a href="https://ghost.org/download/">here</a>. In this
+directory, run:</p>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>npm install --production
+npm start
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Ghost should start up on http://localhost:2368.</p></li>
+<li><p>Go to http://localhost:2368/ghost/ and enter you information into the forms
+to get to the admin panel. From here you can publish blog posts, edit your
+blog information, select different themes, and edit your user profile.</p></li>
+<li><p>Install PIP <a href="https://pip.pypa.io/en/latest/installing.html">here</a> and follow
+the directions.</p></li>
+<li><p>Run:</p>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>buster setup --gh-repo<span class="o">=</span><span class="s1">'your GitHub Pages repo URL'</span>
+buster generate --domain<span class="o">=</span>localhost:2368
+buster deploy
+</pre></td></tr></tbody></table>
+</div></li>
+</ol>
+
+<p>Well done! Your blog should now be pushed to your GitHub Pages repo, and will be live at http://username.github.io shortly. Be patient. The first deployment always takes the longest, and could take up to 40 minutes. I&rsquo;ve also had other updates take over 10 minutes to be reflected in production.
+New themes must go into <code>Ghost-root/content/themes/</code>, and if you&rsquo;d like to like to play around with making your own theme or edit an existing theme from the marketplace, Ghost have a <a href="http://themes.ghost.org/">very good guide</a>. The theme used for this blog can be found <a href="https://github.com/cwhitey/crisp-ghost-theme">here</a>.</p>
+
+<h3>Issues</h3>
+
+<p>I keep my entire ghost source in a separate GitHub repo so I can make blog changes from any machine configured with nodejs and Buster. However, when doing a <code>buster deploy</code> from a different machine, I often get the following error:</p>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre>...
+error: failed to push some refs to
+<span class="s1">'https://github.com/cwhitey/cwhitey.github.io.git'</span>
+hint: Updates were rejected because the remote contains work that you <span class="k">do
+</span>hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: <span class="o">(</span>e.g., <span class="s1">'git pull ...'</span><span class="o">)</span> before pushing again.
+hint: See the <span class="s1">'Note about fast-forwards'</span> <span class="k">in</span> <span class="s1">'git push --help'</span> <span class="k">for </span>details.
+</pre></td></tr></tbody></table>
+</div>
+
+<p>To get it deployed I&rsquo;ve had to copy the contents of the <code>static/</code> directory populated by the <code>buster generate</code> into my GitHub Pages repo, then push it manually:</p>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>git add --all
+git commit -m <span class="s2">"your message"</span>
+git push -f
+</pre></td></tr></tbody></table>
+</div>
+
+<p>As you will be doing this entire process regularly, you may decide to just write a single script to do it for you. I wrote the following for this purpose:</p>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></td><td class="code"><pre><span class="c">#!/bin/bash</span>
+<span class="c">#Assumes:</span>
+<span class="c">#  * Ghost is running on localhost:2368 (by running npm start)</span>
+<span class="c">#  * Buster is installed with PIP</span>
+<span class="c">#  * we're in the /blog/ repo</span>
+<span class="c">#  * there is a ../yourgithub.github.io/ repo checked out</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"$#"</span> <span class="o">==</span> <span class="s2">"0"</span> <span class="o">]</span>; <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Usage:"</span>
+    <span class="nb">echo</span> <span class="s2">"  ./local-deploy.sh [commit-msg]"</span>
+    <span class="nb">exit </span>1;
+<span class="k">fi
+</span>git add content/<span class="k">*</span>;
+git commit -m <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>;
+git push;
+<span class="nb">cd</span> ../;
+rm -rf static/;
+buster setup --gh-repo<span class="o">=</span><span class="s2">"http://yourgithub.github.io"</span>;
+<span class="nb">echo</span> <span class="s2">"GENERATING STATIC PAGE..."</span>;
+buster generate --domain<span class="o">=</span><span class="s2">"localhost:2368"</span>;
+cp -R static/<span class="k">*</span> yourgithub.github.io/;
+<span class="nb">cd </span>yourgithub.github.io/;
+git add --all;
+git commit -m <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>;
+<span class="nb">echo</span> <span class="s2">""</span>;
+<span class="nb">echo</span> <span class="s2">"FORCE PUSHING TO GITHUB PAGES..."</span>;
+git push --force;
+</pre></td></tr></tbody></table>
+</div>
+
+      <div style='clear: both'></div>
+    </div>
+
+    <div id="discourse-comments"></div>
+
+  </article>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer text-muted">
+                &copy; 2015 Callum White. All rights reserved. Powered
+                by <a href="https://middlemanapp.com/">Middleman</a>.
+                These are my opinions alone. See my full <a href="/disclaimer">disclaimer</a>.
+            </footer>
+        </div>
+    </body>
+</html>

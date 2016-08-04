@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>cwhitey</title>
+  <subtitle>Callum White's blog</subtitle>
+  <id>http://cwhitey.me/posts</id>
+  <link href="http://cwhitey.me/posts"/>
+  <link href="http://cwhitey.me/feed.xml" rel="self"/>
+  <updated>2015-08-20T00:00:00+10:00</updated>
+  <author>
+    <name>Callum White</name>
+  </author>
+  <entry>
+    <title>Wait... meta-data on meta-data?!?</title>
+    <link rel="alternate" href="http://cwhitey.me/posts/2015/08/20/wait-meta-data-on-meta-data/"/>
+    <id>http://cwhitey.me/posts/2015/08/20/wait-meta-data-on-meta-data/</id>
+    <published>2015-08-20T00:00:00+10:00</published>
+    <updated>2016-07-07T10:59:17+10:00</updated>
+    <author>
+      <name>Callum White</name>
+    </author>
+    <content type="html">&lt;p&gt;Yesterday James Sofra and I were working on something where we had a map which could be from one of two different sources. We wanted to act based on the origin of the map and we had control over the sources, so we had a few options. Ideally we didn&amp;rsquo;t want to store any extra information in the map itself, and the code was designed in a way we were both happy with, so refactoring wasn&amp;rsquo;t desirable either. What we wanted was just to be able to pass along some metadata with the map from each origin which specifies where it came from. Fortunately Clojure provides &lt;a href="http://clojure.org/metadata"&gt;a way of adding metadata&lt;/a&gt; to things. We moved ahead using &lt;code&gt;with-meta&lt;/code&gt; to attach metadata to the map from each source:&lt;/p&gt;
+&lt;div class="highlight clojure"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;with-meta&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="no"&gt;:my&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;:map&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="no"&gt;:source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;:source-name&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then I was curious&amp;hellip; &amp;ldquo;If the metadata itself is just a map, can we attach metadata to our metadata?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Our eyes widened and we turned back to our REPLs, racing to find the answer.&lt;/p&gt;
+
+&lt;p&gt;As it turns out, you can do this!&lt;/p&gt;
+&lt;div class="highlight clojure"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;my-map&lt;/span&gt;&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="no"&gt;:my&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"map"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="n"&gt;meta-map&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="no"&gt;:meta-map&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="n"&gt;nested-meta-map&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="no"&gt;:nested-meta&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}]&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;meta&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;meta&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;with-meta&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;my-map&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;with-meta&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;meta-map&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;nested-meta-map&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="c1"&gt;; =&amp;gt; {:nested-meta 2}
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;How cool is that? Although I have no idea why you would want to apply metadata to your metadata&amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Tech Digest #4</title>
+    <link rel="alternate" href="http://cwhitey.me/posts/2015/08/16/tech-digest-4/"/>
+    <id>http://cwhitey.me/posts/2015/08/16/tech-digest-4/</id>
+    <published>2015-08-16T00:00:00+10:00</published>
+    <updated>2016-07-07T10:59:17+10:00</updated>
+    <author>
+      <name>Callum White</name>
+    </author>
+    <content type="html">&lt;p&gt;I&amp;rsquo;ve been doing a little Emacs Lisp programming recently and (being far different to Clojure) that has fueled some curiosity and led me to reading more into the history and foundations of Lisp itself. &lt;a href="http://paulgraham.com/lisp.html"&gt;Paul Graham&amp;rsquo;s website&lt;/a&gt; has offered some great reads on the topic.&lt;/p&gt;
+
+&lt;h3&gt;Programming&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="http://blog.codinghorror.com/why-im-the-best-programmer-in-the-world/"&gt;Why I&amp;rsquo;m the best programmer in the world - Jeff Atwood&lt;/a&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;ClojureScript&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="http://fn-code.blogspot.com.au/2015/03/conways-game-of-life-demonstration-and.html"&gt;Conway&amp;rsquo;s Game of Life in ClojureScript - Mark Bastian&lt;/a&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Lisp&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://marktarver.com/bipolar.html"&gt;The Bipoler Lisp Programmer - Mark Tarver&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.paulgraham.com/rootsoflisp.html"&gt;The Roots of Lisp - Paul Graham&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://tagide.com/blog/fiction/jedi-masters/"&gt;Jedi Masters - crista&lt;/a&gt; - A highly entertaining read about the history of Lisp&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Language Design&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="https://www.youtube.com/watch?v=i1KVwoE3n28"&gt;Design and Prototype a Language in Clojure - Jeanine Atkisson&lt;/a&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;&lt;a href="http://decomplecting.org"&gt;Decomplecting - Jason Lewis&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;I just found this guys blog. Man there are some good gems in there:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://decomplecting.org/blog/2014/12/11/the-polyglots-dilemma/"&gt;The Polyglot&amp;rsquo;s Dilemma&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://decomplecting.org/blog/2014/10/30/emacs-down-the-rabbit-hole/"&gt;Emacs: Down the Rabbit Hole&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://decomplecting.org/blog/2013/11/19/so-github-is-not-your-cv-it-still-matters/"&gt;So Github Is Not Your CV. It Still Matters&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>A basic setup for starting emacs from the command-line</title>
+    <link rel="alternate" href="http://cwhitey.me/posts/2015/08/08/a-basic-setup-for-starting-emacs-from-the-command-line/"/>
+    <id>http://cwhitey.me/posts/2015/08/08/a-basic-setup-for-starting-emacs-from-the-command-line/</id>
+    <published>2015-08-08T00:00:00+10:00</published>
+    <updated>2016-07-07T10:59:17+10:00</updated>
+    <author>
+      <name>Callum White</name>
+    </author>
+    <content type="html">&lt;p&gt;Here is a set of shell functions and aliases which I use to control my emacs server and start emacs clients.&lt;/p&gt;
+
+&lt;p&gt;The idea here is to have an emacs server running constantly so that starting an emacs client (GUI or command line) is practically instant.
+The following commands aim to make emacs server management and client creation as quick and easy as possible.&lt;/p&gt;
+
+&lt;p&gt;Make sure you have &lt;code&gt;emacs&lt;/code&gt; and &lt;code&gt;emacsclient&lt;/code&gt; available on your path first.&lt;/p&gt;
+
+&lt;p&gt;To start an emacs server:&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;es&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'emacs --daemon'&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Define a function for starting emacs client in a GUI window.
+If &lt;code&gt;alternate-editor&lt;/code&gt; is an empty string, Emacs goes through the one-off process of starting in daemon mode before running emacsclient.&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;ec&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; emacsclient --alternate-editor&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt; -c &lt;span class="nv"&gt;$@&lt;/span&gt; &amp;amp;; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Start emacs in your terminal:&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="k"&gt;function &lt;/span&gt;et &lt;span class="o"&gt;{&lt;/span&gt; checker-ec -t &lt;span class="nv"&gt;$@&lt;/span&gt;; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kill your emacs server (and any accompanying clients):&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;ek&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"emacsclient -e '(kill-emacs)'"&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Kill emacs, then restart the server:&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="nb"&gt;alias &lt;/span&gt;&lt;span class="nv"&gt;er&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'ek; es;'&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Fix color issues with emacs terminal sessions:&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;TERM&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;xterm-256color
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Tech Digest #3</title>
+    <link rel="alternate" href="http://cwhitey.me/posts/2015/05/20/tech-digest-3/"/>
+    <id>http://cwhitey.me/posts/2015/05/20/tech-digest-3/</id>
+    <published>2015-05-20T00:00:00+10:00</published>
+    <updated>2016-07-07T10:59:17+10:00</updated>
+    <author>
+      <name>Callum White</name>
+    </author>
+    <content type="html">&lt;h3&gt;Microservices&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="http://www.simplicityitself.com/learning/getting-started-microservices/microservices-docker-and-containers-an-overview/"&gt;Microservices: Docker and Containers&lt;/a&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Clojure&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="http://thinkrelevance.com/blog/2013/02/18/hashmaps-as-mini-state-machines"&gt;Hash Maps as Mini State Machines - Timothy Baldridge&lt;/a&gt; - A great example of how clean and concise Clojure solutions can be. &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Lisp&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.paulgraham.com/mcilroy.html"&gt;McCarthy Presents Lisp - Doug McIlroy&lt;/a&gt; - Gave me goosebumps&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://fogus.me/fun/lithp/"&gt;Lithp - fogus&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Reactive Programming&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/Day8/re-frame"&gt;Re-frame (Clojurescript Library) - Day8&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754"&gt;The introduction to Reactive Programming you&amp;rsquo;ve been missing - staltz&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Emacs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.bytopia.org/2013/03/13/using-emacs-as-default-system-editor/"&gt;Emacs as a Default System Editor - Alexander Yakushev&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://draketo.de/light/english/emacs/babcore"&gt;Emacs configurations everyone should have - draketo&lt;/a&gt; - Provides some great tips which I plan to start working into my own emacs configuration&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Talks&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://yow.eventer.com/yow-2012-1012/micro-services-architecture-by-fred-george-1286"&gt;Microservices Architecture - Fred George&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=uk-CF7klLdA"&gt;Programmer Anarchy - Fred George&lt;/a&gt; - This was fun&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=MTawgp3SKy8"&gt;Clojurescript: Lisp&amp;rsquo;s Revenge - David Nolen&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Try lein-try</title>
+    <link rel="alternate" href="http://cwhitey.me/posts/2015/04/29/try-lein-try/"/>
+    <id>http://cwhitey.me/posts/2015/04/29/try-lein-try/</id>
+    <published>2015-04-29T00:00:00+10:00</published>
+    <updated>2016-07-07T10:59:17+10:00</updated>
+    <author>
+      <name>Callum White</name>
+    </author>
+    <content type="html">&lt;p&gt;In this fast-growing Clojure community there are new libraries popping up all the time. I often want to just tinker around with a few libraries, and it&amp;rsquo;s a pain creating a temporary project and setting it up with the appropriate dependencies before I can start using the library in the REPL. The REPL is a great tool for playing around with new libraries and sometimes you&amp;rsquo;ll learn enough inside the REPL and won&amp;rsquo;t have to add any code to the project at all. Wouldn&amp;rsquo;t it be better if we could just skip the whole temporary project step and use the REPL from the very beginning?&lt;/p&gt;
+
+&lt;p&gt;Well with &lt;code&gt;lein-try&lt;/code&gt;, you can!&lt;/p&gt;
+
+&lt;p&gt;Give it a go:&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;lein try prismatic/plumbing &lt;span class="s2"&gt;"0.4.2"&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then once in the REPL you can just &lt;code&gt;use&lt;/code&gt; a namespace:&lt;/p&gt;
+&lt;div class="highlight clojure"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;'prismatic.core&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="c1"&gt;;;=&amp;gt; nil
+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;my-fnk&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fnk&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="c1"&gt;;;=&amp;gt; #'user/my-fnk
+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;my-fnk&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="no"&gt;:a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;:b&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;:d&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="c1"&gt;;;=&amp;gt; 12
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can leave out the version number. This will simply pull the latest version from Clojars.&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;lein try prismatic/plumbing
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And you can supply multiple libraries:&lt;/p&gt;
+&lt;div class="highlight shell"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;lein try prismatic/plumbing org.flatland/useful
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Let&amp;rsquo;s &lt;code&gt;require&lt;/code&gt; and name a namespace from each:&lt;/p&gt;
+&lt;div class="highlight clojure"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;useful.map&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;:as&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;m1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="c1"&gt;;;=&amp;gt; nil
+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;plumbing.map&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;:as&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;m2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="c1"&gt;;;=&amp;gt; nil
+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;m1/map-keys&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"a"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"b"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;inc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="c1"&gt;;;=&amp;gt; {2 "a" 3 "b"}
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;That&amp;rsquo;s it! Give it a go!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Tech Digest #2</title>
+    <link rel="alternate" href="http://cwhitey.me/posts/2015/03/17/tech-digest-2/"/>
+    <id>http://cwhitey.me/posts/2015/03/17/tech-digest-2/</id>
+    <published>2015-03-17T00:00:00+11:00</published>
+    <updated>2016-07-07T10:59:17+10:00</updated>
+    <author>
+      <name>Callum White</name>
+    </author>
+    <content type="html">&lt;h3&gt;ZSH&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="https://github.com/sorin-ionescu/prezto"&gt;Prezto&lt;/a&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Hy&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="http://docs.hylang.org/en/latest/"&gt;Hy, a Python Lisp&lt;/a&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Version control&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="http://41j.com/blog/2015/02/common-git-screwupsquestions-solutions/"&gt;Common Git screwups with solutions&lt;/a&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Web Development&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.helloerik.com/the-subtle-magic-behind-why-the-bootstrap-3-grid-works"&gt;The Subtle Magic Behind Why the Bootstrap 3 Grid Works - Erik Flowers&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://willschenk.com/bootstrap-advanced-grid-tricks/"&gt;Bootstrap: Advanced Grid Tricks - Will Schenk&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Blogging&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.okgrow.com/posts/2013/03/17/how-our-blog-works/"&gt;A blog for coders - Paul Dowman&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://robots.thoughtbot.com/middleman-bourbon-walkthrough"&gt;Styling a Middleman Blog with Bourbon, Neat, and Bitters - Carolann Bonner&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://12devs.co.uk/articles/204/"&gt;Building static websites with Middleman - Chris Bell&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://willschenk.com/building-sites-with-middleman/"&gt;Building sites with Middleman - Will Schenk&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Talks&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; &lt;a href="https://yow.eventer.com/yow-2014-1222/how-did-we-end-up-here-by-todd-l-montgomery-and-martin-thompson-1752"&gt;How did we end up here? - Todd Montgomery&lt;/a&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+</feed>
